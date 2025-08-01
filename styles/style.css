@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Noto+Sans+JP:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
     --primary-color: #222222;
     --secondary-color: #7B7B7B;
     --tertiary-color: #F8F8F8;
     --backgroud-color: #FFF;
-    --text-size: 20px;
+    --text-size: 18px;
 }
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Cabin";
+    font-family: "Noto Sans JP", sans-serif;
 }
 .navbar{
     display: flex;
@@ -38,41 +40,53 @@
     font-size: var(--text-size);
     color: var(--primary-color);
     gap: 5px;
-    font-weight: 500;
+    letter-spacing: 1px;
+    transition: font-size 0.2s ease, font-weight 0.2s ease;
+}
+.nav-links:hover{
+    font-size: 20px;
+    font-weight: bold;
 }
 .navbar-right > .nav-links{
     text-decoration: underline;
 }
+main{
+    display: flex;
+    flex-direction: column;
+}
 .introduction-section{
     display: flex;
+    justify-content: space-between;
     height: 90vh;
-    position: relative;
 }
-.introduction-section-left{
+.introduction-left{
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 12%;
+    height: auto;
+    padding-top: 30px;
+}  
+.introduction-right{
+    display: flex;
+    justify-content: flex-end;
+    width: 88%;
+    height: auto;
+}
+#texto-vertical{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    transform: rotate(90deg);
     color: var(--secondary-color);
+    gap: 20px;
+    margin-left: -10px;
     font-size: var(--text-size);
 }
-.vertical-text {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg);
-    transform-origin: center;
-    color: #ccc;
-    font-size: 14px;
-    font-weight: 300;
-    letter-spacing: 2px;
-    z-index: 10;
-    white-space: nowrap;
-    font-family: "Cabin", sans-serif;
-    width: 400px;
-    height: 2px;
-    border-bottom: 2px solid #7B7B7B;
+#celso{
+    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.2));
+    transition: filter 0.2s ease;
 }
-
-.introduction-section-right{
-    display: flex;
+#celso:hover{
+    filter: drop-shadow(5px 5px 20px rgba(0, 0, 0, 0.397));
 }
