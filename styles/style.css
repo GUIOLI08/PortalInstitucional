@@ -71,7 +71,7 @@ main{
     display: flex;
     justify-content: flex-end;
     width: 88%;
-    height: auto;
+    height: auto;  
 }
 #texto-vertical{
     display: flex;
