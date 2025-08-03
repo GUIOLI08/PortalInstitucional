@@ -31,6 +31,80 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Portfolio Carousel
+    const portfolioCarousel = {
+        currentIndex: 0,
+        items: document.querySelectorAll('.portfolio-item'),
+        indicators: document.querySelectorAll('.indicator'),
+        nextBtn: document.querySelector('.next-btn'),
+        prevBtn: document.querySelector('.prev-btn'),
+        
+        init() {
+            this.setupEventListeners();
+            this.updateCarousel();
+        },
+        
+        setupEventListeners() {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+            
+            this.indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => this.goToSlide(index));
+            });
+            
+            // Auto-play carousel
+            setInterval(() => this.nextSlide(), 5000);
+        },
+        
+        nextSlide() {
+            this.currentIndex = (this.currentIndex + 1) % this.items.length;
+            this.updateCarousel();
+        },
+        
+        prevSlide() {
+            this.currentIndex = (this.currentIndex - 1 + this.items.length) % this.items.length;
+            this.updateCarousel();
+        },
+        
+        goToSlide(index) {
+            this.currentIndex = index;
+            this.updateCarousel();
+        },
+        
+        updateCarousel() {
+            this.items.forEach((item, index) => {
+                item.classList.remove('active', 'prev', 'next');
+                
+                if (index === this.currentIndex) {
+                    item.classList.add('active');
+                } else if (index === (this.currentIndex - 1 + this.items.length) % this.items.length) {
+                    item.classList.add('prev');
+                } else if (index === (this.currentIndex + 1) % this.items.length) {
+                    item.classList.add('next');
+                }
+            });
+            
+            this.indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === this.currentIndex);
+            });
+        }
+    };
+    
+    // Initialize carousel
+    if (document.querySelector('.portfolio-carousel')) {
+        portfolioCarousel.init();
+    }
+
     // Intersection Observer for animations
     const observerOptions = {
         threshold: 0.1,
@@ -46,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observe elements for animation
-    const animateElements = document.querySelectorAll('.portfolio-item, .work-item, .insight-item, .research-item, .about-content');
+    const animateElements = document.querySelectorAll('.work-item, .insight-item, .research-item, .about-content');
     animateElements.forEach(el => {
         observer.observe(el);
     });
@@ -91,18 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (statsSection) statsObserver.observe(statsSection);
     if (aboutStatsSection) statsObserver.observe(aboutStatsSection);
-
-    // Portfolio item hover effects
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    portfolioItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.02)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
 
     // Contact form handling
     const contactForm = document.getElementById('contactForm');
@@ -189,22 +251,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         
-        // Add notification styles
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            max-width: 350px;
-        `;
-        
         document.body.appendChild(notification);
         
         // Animate in
@@ -235,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const celsoImage = document.getElementById('celso');
         
         if (heroSection && celsoImage) {
-            const rate = scrolled * -0.5;
+            const rate = scrolled * -0.3;
             celsoImage.style.transform = `translateY(${rate}px)`;
         }
     });
@@ -261,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
     style.textContent = `
         img {
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.5s ease;
         }
         img.loaded {
             opacity: 1;
@@ -274,12 +320,10 @@ document.addEventListener('DOMContentLoaded', function() {
     researchItems.forEach(item => {
         item.addEventListener('mouseenter', function() {
             this.style.transform = 'translateX(10px)';
-            this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
         });
         
         item.addEventListener('mouseleave', function() {
             this.style.transform = 'translateX(0)';
-            this.style.boxShadow = 'none';
         });
     });
 
@@ -326,6 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add click handlers for portfolio items
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
     portfolioItems.forEach(item => {
         item.addEventListener('click', function() {
             const title = this.querySelector('h3')?.textContent || 'Projeto';
@@ -365,16 +410,6 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.style.animationDelay = `${index * 0.5}s`;
     });
 
-    // Add float animation keyframes
-    const floatStyle = document.createElement('style');
-    floatStyle.textContent = `
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-    `;
-    document.head.appendChild(floatStyle);
-
     // Add ripple effect to buttons
     function addRippleEffect(button) {
         button.addEventListener('click', function(e) {
@@ -405,44 +440,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add ripple animation keyframes
-    const rippleStyle = document.createElement('style');
-    rippleStyle.textContent = `
-        @keyframes ripple {
-            to {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(rippleStyle);
-
     // Apply ripple effect to buttons
-    const buttons = document.querySelectorAll('.cta-button, .final-cta-button, .submit-button, .lattes-link');
+    const buttons = document.querySelectorAll('.cta-button, .final-cta-button, .submit-button, .lattes-link, .carousel-btn');
     buttons.forEach(addRippleEffect);
 
     // Back to top button
     const backToTopBtn = document.createElement('button');
     backToTopBtn.innerHTML = '↑';
     backToTopBtn.className = 'back-to-top';
-    backToTopBtn.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: var(--accent-color);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        font-size: 20px;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-    `;
     
     document.body.appendChild(backToTopBtn);
     
@@ -468,13 +473,88 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add hover effect to back to top button
     backToTopBtn.addEventListener('mouseenter', function() {
         this.style.transform = 'scale(1.1)';
-        this.style.boxShadow = '0 8px 25px rgba(255, 107, 107, 0.4)';
+        this.style.boxShadow = '0 8px 25px rgba(34, 34, 34, 0.4)';
     });
     
     backToTopBtn.addEventListener('mouseleave', function() {
         this.style.transform = 'scale(1)';
-        this.style.boxShadow = '0 5px 15px rgba(255, 107, 107, 0.3)';
+        this.style.boxShadow = '0 5px 15px rgba(34, 34, 34, 0.3)';
     });
 
-    console.log('Portal Sucelso - Website carregado com sucesso!');
+    // Touch/swipe support for carousel
+    let startX = 0;
+    let endX = 0;
+    
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (carouselContainer) {
+        carouselContainer.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+        
+        carouselContainer.addEventListener('touchend', function(e) {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const threshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    portfolioCarousel.nextSlide();
+                } else {
+                    portfolioCarousel.prevSlide();
+                }
+            }
+        }
+    }
+
+    // Keyboard navigation for carousel
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            portfolioCarousel.prevSlide();
+        } else if (e.key === 'ArrowRight') {
+            portfolioCarousel.nextSlide();
+        }
+    });
+
+    // Enhanced scroll animations
+    const scrollElements = document.querySelectorAll('.about-content, .research-item, .work-item, .insight-item');
+    
+    const elementInView = (el, dividend = 1) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (
+            elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+        );
+    };
+    
+    const elementOutofView = (el) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (
+            elementTop > (window.innerHeight || document.documentElement.clientHeight)
+        );
+    };
+    
+    const displayScrollElement = (element) => {
+        element.classList.add('scrolled');
+    };
+    
+    const hideScrollElement = (element) => {
+        element.classList.remove('scrolled');
+    };
+    
+    const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+            if (elementInView(el, 1.25)) {
+                displayScrollElement(el);
+            } else if (elementOutofView(el)) {
+                hideScrollElement(el);
+            }
+        });
+    };
+    
+    window.addEventListener('scroll', handleScrollAnimation);
+
+    console.log('Portal Sucelso - Website carregado com sucesso! Carrossel implementado.');
 });
