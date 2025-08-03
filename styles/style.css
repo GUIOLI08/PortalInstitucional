@@ -42,7 +42,6 @@ body {
     backdrop-filter: blur(15px);
     z-index: 1000;
     transition: all 0.3s ease;
-    border-bottom: 1px solid var(--tertiary-color);
 }
 
 .navbar.scrolled {
@@ -137,16 +136,9 @@ body {
 .contact-btn::after {
     display: none;
 }
-
-/* Main Content */
-main {
-    padding-top: 10vh;
-}
-
 .introduction-section {
     display: flex;
     height: 90vh;
-    background: linear-gradient(135deg, var(--background-color) 0%, var(--tertiary-color) 100%);
 }
 
 /* Seção Left - Texto Vertical */
@@ -1123,7 +1115,6 @@ main {
 .footer-logo {
     width: 80px;
     margin-bottom: 20px;
-    filter: brightness(0) invert(1);
 }
 
 .footer-left p {

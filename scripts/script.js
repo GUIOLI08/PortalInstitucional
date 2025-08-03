@@ -1,5 +1,8 @@
 // Smooth scrolling and navigation effects
 document.addEventListener('DOMContentLoaded', function() {
+
+    let intervalo = 5000;
+
     // Mobile menu toggle (if needed for responsive)
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.navbar-left .nav-section:last-child');
@@ -52,20 +55,37 @@ document.addEventListener('DOMContentLoaded', function() {
         init() {
             this.setupEventListeners();
             this.updateCarousel();
+            this.startAutoPlay();
         },
         
         setupEventListeners() {
-            this.nextBtn.addEventListener('click', () => this.nextSlide());
-            this.prevBtn.addEventListener('click', () => this.prevSlide());
-            
-            this.indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => this.goToSlide(index));
+            this.nextBtn.addEventListener('click', () => {
+                this.nextSlide();
+                this.resetAutoPlay();
             });
-            
-            // Auto-play carousel
-            setInterval(() => this.nextSlide(), 5000);
+
+            this.prevBtn.addEventListener('click', () => {
+                this.prevSlide();
+                this.resetAutoPlay();
+            });
+
+            this.indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    this.goToSlide(index);
+                    this.resetAutoPlay();
+                });
+            });
         },
         
+        startAutoPlay() {
+            this.intervalId = setInterval(() => this.nextSlide(), intervalo);
+        },
+
+        resetAutoPlay() {
+            clearInterval(this.intervalId);
+            this.startAutoPlay();
+        },
+
         nextSlide() {
             this.currentIndex = (this.currentIndex + 1) % this.items.length;
             this.updateCarousel();
@@ -84,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCarousel() {
             this.items.forEach((item, index) => {
                 item.classList.remove('active', 'prev', 'next');
-                
+
                 if (index === this.currentIndex) {
                     item.classList.add('active');
                 } else if (index === (this.currentIndex - 1 + this.items.length) % this.items.length) {
@@ -93,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     item.classList.add('next');
                 }
             });
-            
+
             this.indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === this.currentIndex);
             });
