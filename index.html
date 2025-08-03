@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#222222">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="shortcut icon" href="images/LogoPortalSucelso.png" type="image/x-icon">
     <link rel="stylesheet" href="styles/style.css">
     <title>Portal Sucelso - Professor Celso Barreto</title>
@@ -31,6 +35,13 @@
                             <a href="#services" class="nav-links">Serviços</a>
                         </li>
                     </div>
+                    
+                    <!-- Botão do menu mobile -->
+                    <button class="mobile-menu-btn" aria-label="Menu mobile">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+                        </svg>
+                    </button>
                 </div>
                 <div class="navbar-right">
                     <a href="#contact" class="nav-links contact-btn">
@@ -569,7 +580,16 @@
             </div>
         </div>
     </footer>
-
+    <script>
+    // Viewport height fix para mobile
+    function setVH() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
+    </script>
     <script src="scripts/script.js"></script>
 </body>
 </html>

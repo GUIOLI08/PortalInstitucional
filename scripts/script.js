@@ -3,6 +3,59 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let intervalo = 5000;
 
+    function initMobileMenu() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.navbar-left .nav-section:last-child');
+    const navLinks = document.querySelectorAll('.nav-links');
+    
+    if (mobileMenuBtn && navMenu) {
+        // Toggle menu mobile
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+            
+            // Animação do ícone do hambúrguer
+            const svg = this.querySelector('svg path');
+            if (navMenu.classList.contains('active')) {
+                svg.setAttribute('d', 'M256-200l-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z');
+                this.setAttribute('aria-expanded', 'true');
+            } else {
+                svg.setAttribute('d', 'M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z');
+                this.setAttribute('aria-expanded', 'false');
+            }
+
+        });
+            // Fechar menu ao clicar em um link
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    const svg = mobileMenuBtn.querySelector('svg path');
+                    svg.setAttribute('d', 'M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+            
+            // Fechar menu ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuBtn.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    const svg = mobileMenuBtn.querySelector('svg path');
+                    svg.setAttribute('d', 'M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        // Fechar menu com tecla ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    const svg = mobileMenuBtn.querySelector('svg path');
+                    svg.setAttribute('d', 'M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    }
+
     // Mobile menu toggle (if needed for responsive)
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.navbar-left .nav-section:last-child');
@@ -124,6 +177,188 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.portfolio-carousel')) {
         portfolioCarousel.init();
     }
+
+    function adjustCarouselForMobile() {
+    if (window.innerWidth <= 768) {
+        // Desabilitar autoplay em mobile para melhor UX
+        if (portfolioCarousel && portfolioCarousel.intervalId) {
+            clearInterval(portfolioCarousel.intervalId);
+        }
+        
+        // Ajustar sensibilidade do swipe
+        const carouselContainer = document.querySelector('.carousel-container');
+        if (carouselContainer) {
+            carouselContainer.style.touchAction = 'pan-y pinch-zoom';
+        }
+    } else {
+        // Reativar autoplay em desktop
+        if (portfolioCarousel) {
+            portfolioCarousel.startAutoPlay();
+        }
+    }
+}
+
+// Função para otimizar imagens em dispositivos móveis
+function optimizeImagesForMobile() {
+    if (window.innerWidth <= 768) {
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            // Lazy loading mais agressivo em mobile
+            img.loading = 'lazy';
+            
+            // Reduzir qualidade de imagens em mobile se necessário
+            if (img.src.includes('celso') && !img.dataset.optimized) {
+                img.style.imageRendering = 'optimizeQuality';
+                img.dataset.optimized = 'true';
+            }
+        });
+    }
+}
+
+// Função para ajustar animações em dispositivos móveis
+function adjustAnimationsForMobile() {
+    if (window.innerWidth <= 768) {
+        // Reduzir duração das animações em mobile
+        const style = document.createElement('style');
+        style.textContent = `
+            @media (max-width: 768px) {
+                *, *::before, *::after {
+                    animation-duration: 0.3s !important;
+                    transition-duration: 0.3s !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Função para detectar orientação e ajustar layout
+function handleOrientationChange() {
+    const isLandscape = window.innerWidth > window.innerHeight;
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile && isLandscape) {
+        document.body.classList.add('mobile-landscape');
+        
+        // Ajustar altura da seção hero em landscape
+        const heroSection = document.querySelector('.introduction-section');
+        if (heroSection) {
+            heroSection.style.minHeight = '100vh';
+        }
+    } else {
+        document.body.classList.remove('mobile-landscape');
+        
+        const heroSection = document.querySelector('.introduction-section');
+        if (heroSection) {
+            heroSection.style.minHeight = '';
+        }
+    }
+}
+
+// Função para melhorar performance em dispositivos móveis
+function optimizePerformanceForMobile() {
+    if (window.innerWidth <= 768) {
+        // Reduzir efeitos parallax em mobile
+        window.removeEventListener('scroll', parallaxHandler);
+        
+        // Usar requestAnimationFrame para scroll otimizado
+        let ticking = false;
+        
+        function optimizedScrollHandler() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    // Funções de scroll otimizadas aqui
+                    const navbar = document.querySelector('.navbar');
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                    
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+    }
+}
+
+// Função para melhorar acessibilidade em touch devices
+function improveTouchAccessibility() {
+    // Aumentar área de toque para botões pequenos
+    const smallButtons = document.querySelectorAll('.carousel-btn, .back-to-top');
+    smallButtons.forEach(btn => {
+        if (window.innerWidth <= 768) {
+            btn.style.minWidth = '44px';
+            btn.style.minHeight = '44px';
+        }
+    });
+    
+    // Melhorar feedback tátil
+    const interactiveElements = document.querySelectorAll('button, a, .portfolio-item, .work-item');
+    interactiveElements.forEach(el => {
+        el.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+        }, { passive: true });
+        
+        el.addEventListener('touchend', function() {
+            this.style.transform = '';
+        }, { passive: true });
+    });
+}
+
+// Função para gerenciar o viewport height em iOS
+function handleIOSViewport() {
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        const setIOSViewport = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+        
+        setIOSViewport();
+        window.addEventListener('resize', setIOSViewport);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(setIOSViewport, 100);
+        });
+    }
+}
+
+// Adicione essas chamadas no final do DOMContentLoaded:
+
+// Inicializar funcionalidades mobile
+initMobileMenu();
+adjustCarouselForMobile();
+optimizeImagesForMobile();
+adjustAnimationsForMobile();
+handleOrientationChange();
+optimizePerformanceForMobile();
+improveTouchAccessibility();
+handleIOSViewport();
+
+// Event listeners para mudanças de orientação e resize
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        handleOrientationChange();
+        adjustCarouselForMobile();
+    }, 100);
+});
+
+window.addEventListener('resize', () => {
+    adjustCarouselForMobile();
+    optimizePerformanceForMobile();
+});
+
+// Prevenir zoom em inputs em iOS
+if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    const inputs = document.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.style.fontSize = '16px';
+        });
+    });
+}
 
     // Intersection Observer for animations
     const observerOptions = {
