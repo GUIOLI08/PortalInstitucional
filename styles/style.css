@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Noto+Sans+JP:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 :root{
     --primary-color: #222222;
     --secondary-color: #7B7B7B;
@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Noto Sans JP", sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 .navbar{
     display: flex;
@@ -40,7 +40,6 @@
     font-size: var(--text-size);
     color: var(--primary-color);
     gap: 5px;
-    letter-spacing: 1px;
     transition: font-size 0.2s ease, font-weight 0.2s ease;
 }
 .nav-links:hover{
@@ -69,9 +68,10 @@ main{
 }  
 .introduction-right{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 88%;
-    height: auto;  
+    height: 90vh;
+    padding-left: 50px;  
 }
 #texto-vertical{
     display: flex;
