@@ -12,12 +12,12 @@
         <nav>
             <ul class="navbar">
                 <div class="navbar-left">
-                    <div style="display: flex; gap: 45px; align-items: center;">
+                    <div class="nav-section">
                         <li>
                             <a href="#"><img id="Logo" src="images/LogoPortalSucelsoPB.png" alt="Portal Sucelso" title="Portal Sucelso"></a>
                         </li>
                     </div>
-                    <div style="display: flex; gap: 60px; align-items: center;">
+                    <div class="nav-section">
                         <li class="nav-items">
                             <a href="#" class="nav-links">Sobre mim</a>
                         </li>
@@ -32,61 +32,71 @@
                 <div class="navbar-right">
                     <a href="#" class="nav-links">
                         Contate-me
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#222222"><path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#222222">
+                            <path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z"/>
+                        </svg>
                     </a>
                 </div>
             </ul>
         </nav>
     </header>
+
     <main>
         <section class="introduction-section">
             <div class="introduction-left">
-                <label id="texto-vertical">
-                    <p>Desenvolvedor Web</p>
-                    <div style="border-bottom: 1px solid var(--secondary-color); width: 470px;"></div>
-                    <p>2025</p>
-                </label>
+                <div class="vertical-text">
+                    <span>Desenvolvedor Web</span>
+                    <div class="divider"></div>
+                    <span>2025</span>
+                </div>
             </div>
+
             <div class="introduction-right">
-                <div style="display: flex; flex-direction: column; gap: 140px; justify-content: center;">
-                    <div>
-                        <div style="display: flex; gap: 100px;">
-                            <div style="display:flex; justify-content: center; gap: 5px;">
-                                <div style="display: flex; height: 100%; padding-top: 10px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#222222"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                                </div>
-                                <div style="display: flex; flex-direction: column;">
-                                    <label style="font-size: 50px;">200</label>
-                                    <label style="color: var(--secondary-color); font-size: 18px;">Projetos completos</label>
-                                </div>
+                <div class="content-area">
+                    <!-- Stats Section -->
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#222222">
+                                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/>
+                                </svg>
                             </div>
-                            <div style="display:flex; justify-content: center; gap: 5px;">
-                                <div style="display: flex; height: 100%; padding-top: 10px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#222222"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
-                                </div>
-                                <div style="display: flex; flex-direction: column;">
-                                    <label style="font-size: 50px;">50</label>
-                                    <label style="color: var(--secondary-color); font-size: 18px;">Projetos completos</label>
-                                </div>
+                            <div class="stat-content">
+                                <div class="number">200</div>
+                                <div class="label">Projetos completos</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#222222">
+                                    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="number">50</div>
+                                <div class="label">Projetos completos</div>
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; flex-direction: column;">
-                        <label>
-                            <h1 style="font-size: 140px;">Olá!</h1>
-                        </label>
-                        <label>
-                            <div style="display: flex; align-items: center; gap: 10px; position: relative; bottom: 30px;">
-                                <div style="border-bottom: 2px solid black; width: 20px;"></div>
-                                <label style="font-size: 18px;">Eu sou Celso Barreto da Silva.</label>
-                            </div>
-                        </label>
+
+                    <!-- Greeting Section -->
+                    <div class="greeting">
+                        <h1>Olá!</h1>
+                        <div class="name-section">
+                            <div class="name-divider"></div>
+                            <span class="name-text">Eu sou Celso Barreto da Silva.</span>
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center; position: relative; top: 40px;">
-                        <label style="font-size: 18px; color: var(--secondary-color);">Role para baixo</label>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#7B7B7B"><path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z"/></svg>
+
+                    <!-- Scroll Section -->
+                    <div class="scroll-section">
+                        <span class="scroll-text">Role para baixo</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#7B7B7B">
+                            <path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z"/>
+                        </svg>
                     </div>
                 </div>
+
                 <img id="celso" src="images/Celso2.png" alt="Celso Barreto da Silva" title="Celso Barreto da Silva">
             </div>
         </section>

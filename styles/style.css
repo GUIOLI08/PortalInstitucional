@@ -1,38 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Noto+Sans+JP:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-:root{
+
+:root {
     --primary-color: #222222;
     --secondary-color: #7B7B7B;
     --tertiary-color: #F8F8F8;
-    --backgroud-color: #FFF;
+    --background-color: #FFF;
     --text-size: 18px;
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
-.navbar{
+
+/* Header e Navegação */
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    width: 100%;
     height: 10vh;
     padding: 30px 70px 0px 60px;
 }
-.navbar-left{
+
+.navbar-left {
     display: flex;
     align-items: center;
     gap: 75px;
 }
-#Logo{
+
+.navbar-left .nav-section {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left .nav-section:first-child {
+    gap: 45px;
+}
+
+.navbar-left .nav-section:last-child {
+    gap: 60px;
+}
+
+#Logo {
     width: 100px;
 }
-.nav-links{
+
+.nav-links {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,51 +58,130 @@
     gap: 5px;
     transition: font-size 0.2s ease, font-weight 0.2s ease;
 }
-.nav-links:hover{
+
+.nav-links:hover {
     font-size: 20px;
     font-weight: bold;
 }
-.navbar-right > .nav-links{
+
+.navbar-right .nav-links {
     text-decoration: underline;
 }
-main{
+
+/* Main Content */
+.introduction-section {
     display: flex;
-    flex-direction: column;
-}
-.introduction-section{
-    display: flex;
-    justify-content: space-between;
     height: 90vh;
 }
-.introduction-left{
+
+/* Seção Left - Texto Vertical */
+.introduction-left {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 12%;
-    height: auto;
     padding-top: 30px;
-}  
-.introduction-right{
+}
+
+.vertical-text {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--secondary-color);
+    font-size: var(--text-size);
+    white-space: nowrap;
+    transform: rotate(90deg);
+    transform-origin: center;
+    position: relative;
+    left: -6px
+}
+
+.vertical-text .divider {
+    border-bottom: 1px solid var(--secondary-color);
+    width: 470px;
+}
+
+/* Seção Right */
+.introduction-right {
     display: flex;
     justify-content: space-between;
     width: 88%;
-    height: 90vh;
-    padding-left: 50px;  
+    padding-left: 50px;
 }
-#texto-vertical{
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 140px;
+    justify-content: center;
+}
+
+/* Stats Section */
+.stats {
+    display: flex;
+    gap: 100px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.stat-icon {
+    padding-top: 10px;
+}
+
+.stat-content .number {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.stat-content .label {
+    color: var(--secondary-color);
+    font-size: 18px;
+}
+
+/* Greeting Section */
+.greeting h1 {
+    font-size: 140px;
+    margin: 0;
+}
+
+.name-section {
     display: flex;
     align-items: center;
-    position: absolute;
-    transform: rotate(90deg);
-    color: var(--secondary-color);
-    gap: 20px;
-    margin-left: -10px;
-    font-size: var(--text-size);
+    gap: 10px;
+    margin-top: -30px;
 }
-#celso{
+
+.name-divider {
+    border-bottom: 2px solid black;
+    width: 20px;
+}
+
+.name-text {
+    font-size: 18px;
+}
+
+/* Scroll Section */
+.scroll-section {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.scroll-text {
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+
+/* Image */
+#celso {
     filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.2));
     transition: filter 0.2s ease;
 }
-#celso:hover{
+
+#celso:hover {
     filter: drop-shadow(5px 5px 20px rgba(0, 0, 0, 0.397));
 }
