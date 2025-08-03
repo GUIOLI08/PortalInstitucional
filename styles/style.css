@@ -639,11 +639,9 @@ body {
 }
 
 .research-item:hover {
-    transform: translateX(10px);
-    background: var(--tertiary-color);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(34, 34, 34, 0.05);
+    outline: 2px solid var(--primary-color);
+    outline-offset: 10px;
+    border-radius: 2px;
 }
 
 .research-year {

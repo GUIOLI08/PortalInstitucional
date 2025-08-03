@@ -335,17 +335,6 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 
-    // Research items hover effect
-    const researchItems = document.querySelectorAll('.research-item');
-    researchItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(10px)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(0)';
-        });
-    });
 
     // Work items stagger animation
     const workItems = document.querySelectorAll('.work-item');
