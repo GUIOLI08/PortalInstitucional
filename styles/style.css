@@ -59,6 +59,7 @@ body {
 .navbar-left .nav-section {
     display: flex;
     align-items: center;
+    gap: 25px;
 }
 
 .navbar-left .nav-section:first-child {
@@ -1280,15 +1281,9 @@ body {
     
     /* Header Mobile */
     .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
         padding: 15px 20px;
         height: auto;
         background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--tertiary-color);
     }
     
     .navbar-left {
